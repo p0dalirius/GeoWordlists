@@ -7,6 +7,9 @@
   <br>
 </p>
 
+## Currently supported countries
+ - 🇫🇷 France
+
 ## Usage
 
 ```
