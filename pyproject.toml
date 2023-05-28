@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geowordlists"
+version = "1.0.1"
+description = ""
+readme  = "README.md"
+requires-python = ">=3.6"
+license = { text = "GPL2"}
+authors = [
+        {email="podalirius@protonmail.com"},
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+    "Operating System :: OS Independent",
+]
+dependencies = []
+
+[project.urls]
+repository = "https://github.com/p0dalirius/GeoWordlists"
+
+
+[project.optional-dependencies]
+build = [
+    "build"
+]
+twine = [
+    "twine"
+]
