@@ -12,6 +12,14 @@ from geowordlists.countries.france import France
 VERSION = "1.0.1"
 
 
+def size_in_bytes(size):
+    units = ['B', 'kB', 'MB', 'GB', 'TB', 'PB']
+    for k in range(len(units)):
+        if size < (1024 ** (k + 1)):
+            break
+    return "%4.2f %s" % (round(size / (1024 ** (k)), 2), units[k])
+
+
 def parseArgs():
     print("GeoWordlists.py v%s - by @podalirius_\n" % VERSION)
 
@@ -58,7 +66,9 @@ def main():
         f = open(path_to_file, "w")
         f.write("\n".join(wordlist) + "\n")
         f.close()
-        print("[+] Written '%s' (%s bytes)" % (path_to_file, len("\n".join(wordlist))))
+        written_size = size_in_bytes(len("\n".join(wordlist)))
+        print("[+] Written '%s' (%s)" % (path_to_file, written_size))
+
 
 if __name__ == '__main__':
     main()
