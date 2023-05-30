@@ -37,16 +37,23 @@ if __name__ == '__main__':
     # Normalize
     print("[+] Normalizing commune names in 'laposte_hexasmal.json' ... ", end="")
     sys.stdout.flush()
+    newdata = []
     for k in range(len(data)):
         data[k]["fields"]["nom_de_la_commune"] = format_commune(data[k]["fields"]["nom_de_la_commune"])
-        lat, long = data[k]["geometry"]["coordinates"][::-1]
-        data[k]["geometry"]["coordinates"] = {"latitude": lat, "longitude": long}
+        latitude, longitude = data[k]["geometry"]["coordinates"][::-1]
+        newdata.append({
+            "country_code": "FR",
+            "postal_code": data[k]["fields"]["code_postal"],
+            "place_name": data[k]["fields"]["nom_de_la_commune"],
+            "latitude": latitude,
+            "longitude": longitude
+        })
     print("done.")
 
     # Write new data
-    print("[+] Writing 'laposte_hexasmal.json' ... ", end="")
+    print("[+] Writing 'data.json' ... ", end="")
     sys.stdout.flush()
-    f = open("laposte_hexasmal.json", "w")
-    f.write(json.dumps(data))
+    f = open("data.json", "w")
+    f.write(json.dumps(newdata, indent=4))
     f.close()
     print("done.")
