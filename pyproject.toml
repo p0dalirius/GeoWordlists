@@ -30,3 +30,7 @@ build = [
 twine = [
     "twine"
 ]
+
+[project.scripts]
+geowordlists = "geowordlists.__main__:main"
+GeoWordlists = "geowordlists.__main__:main"
