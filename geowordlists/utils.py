@@ -9,25 +9,18 @@ import math
 
 def haversine_distance(origin, destination):
     """
-    Calculate the Haversine distance.
+    Calculate the great-circle distance between two points on Earth using the haversine formula.
 
-    Parameters
-    ----------
-    origin : tuple of float
-        (lat, long)
-    destination : tuple of float
-        (lat, long)
+    Args:
+        origin: Tuple of (latitude, longitude) coordinates for the starting point
+        destination: Tuple of (latitude, longitude) coordinates for the ending point
 
-    Returns
-    -------
-    distance_in_km : float
+    Returns:
+        float: Distance between the points in kilometers, rounded to 2 decimal places
 
-    Examples
-    --------
-    >>> origin = (48.1372, 11.5756)  # Munich
-    >>> destination = (52.5186, 13.4083)  # Berlin
-    >>> round(haversine_distance(origin, destination), 1)
-    504.2
+    The haversine formula determines the great-circle distance between two points on a sphere
+    given their latitudes and longitudes. This implementation uses Earth's mean radius of
+    6,371,009 meters and returns the distance in kilometers.
     """
     lat1, lon1 = origin
     lat2, lon2 = destination
@@ -45,3 +38,20 @@ def haversine_distance(origin, destination):
     d = radius * c
 
     return round(d/1000, 2)
+
+
+def size_in_bytes(size):
+    """
+    Convert a size in bytes to a human readable string with appropriate units.
+
+    Args:
+        size: Size in bytes as an integer
+
+    Returns:
+        str: Human readable string with size and units (e.g. "1.50 MB")
+    """
+    units = ['B', 'kB', 'MB', 'GB', 'TB', 'PB']
+    for k in range(len(units)):
+        if size < (1024 ** (k + 1)):
+            break
+    return "%4.2f %s" % (round(size / (1024 ** (k)), 2), units[k])

@@ -7,17 +7,10 @@
 import os
 import argparse
 from geowordlists.countries.france import France
+from geowordlists.utils import size_in_bytes
 
 
 VERSION = "1.0.1"
-
-
-def size_in_bytes(size):
-    units = ['B', 'kB', 'MB', 'GB', 'TB', 'PB']
-    for k in range(len(units)):
-        if size < (1024 ** (k + 1)):
-            break
-    return "%4.2f %s" % (round(size / (1024 ** (k)), 2), units[k])
 
 
 def parseArgs():
@@ -25,15 +18,15 @@ def parseArgs():
 
     parser = argparse.ArgumentParser(description="")
 
-    parser.add_argument("-v", "--verbose", default=False, action="store_true", help='Verbose mode. (default: False)')
     parser.add_argument("--debug", dest="debug", action="store_true", default=False, help="Debug mode.")
 
     parser.add_argument("-k", "--kilometers", required=False, default=50, type=int, help="Search radius in kilometers around the client city.")
-    parser.add_argument("-o", "--output-file", required=False, default="wordlist.txt", help="Output file containing the generated wordlist.")
-    parser.add_argument("-m", "--max-passwords", required=False, default=None, type=int, help="Maximum passwords generated.")
-
     # parser.add_argument("--country", dest="country", required=True, help="Select country.")
     parser.add_argument("-p", "--postal-code", dest="postal_code", required=True, help="Postal code of the client city.")
+
+    group = parser.add_argument_group("Advanced options")
+    group.add_argument("-o", "--output-file", required=False, default="wordlist.txt", help="Output file containing the generated wordlist.")
+    group.add_argument("-m", "--max-passwords", required=False, default=None, type=int, help="Maximum passwords generated.")
 
     return parser.parse_args()
 

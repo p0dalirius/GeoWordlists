@@ -12,13 +12,19 @@ from geowordlists.utils import haversine_distance
 
 class France(object):
     """
-    Documentation for class France
+    A class representing geographical data and search functionality for cities in France.
+
+    This class provides methods to:
+    - Load and access French postal code and city data
+    - Look up cities by postal code
+    - Search for cities within a specified radius of a given city
+
+    Attributes:
+        data: A list of dictionaries containing city data loaded from laposte_hexasmal.json
+        debug: Boolean flag to enable/disable debug output
     """
 
     def __init__(self, debug=False):
-        """
-
-        """
         super(France, self).__init__()
         self.data = self.__load_data()
         self.debug = debug
@@ -28,9 +34,14 @@ class France(object):
 
         :return:
         """
-        f = open(os.path.sep.join([os.path.dirname(__file__), "..", "data", "france", "laposte_hexasmal.json"]), "r")
+
+        relative_path = ["..", "data", "france", "laposte_hexasmal.json"]
+        absolute_path = os.path.sep.join([os.path.dirname(__file__)] + relative_path)
+
+        f = open(absolute_path, "r")
         data = json.loads(f.read())
         f.close()
+
         return data
 
     def select_client_city(self, postal_code):
@@ -92,6 +103,7 @@ class France(object):
 
         # Sort by distance
         candidates = list(sorted(candidates, key=lambda x:x["distance"]))
+
         return candidates
 
     def generate(self, candidates):
@@ -107,6 +119,7 @@ class France(object):
             commune_name = data["commune"]["fields"]["nom_de_la_commune"]
             commune_name = re.sub("[ ',-]", "", commune_name)
 
+            # These are the hardcoded generation rules
             variants = [
                 commune_name + data["commune"]["fields"]["code_postal"][:2],
                 commune_name + data["commune"]["fields"]["code_postal"][:2] + "!",
