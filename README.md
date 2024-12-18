@@ -16,7 +16,7 @@
 $ ./GeoWordlists.py -h
 GeoWordlists.py v1.0.1 - by @podalirius_
 
-usage: GeoWordlists.py [-h] [-v] [--debug] [-k KILOMETERS] [-o OUTPUT_FILE] -p POSTAL_CODE
+usage: GeoWordlists.py [-h] [-v] [--debug] [-k KILOMETERS] [-o OUTPUT_FILE] -p POSTAL_CODE [--no-variant]
 
 options:
   -h, --help            show this help message and exit
@@ -28,6 +28,7 @@ options:
                         Output file containing the generated wordlist.
   -p POSTAL_CODE, --postal-code POSTAL_CODE
                         Postal code of the client city.
+  --no-variant          Will not use any variant and only output the name of the city.
 ```
 
 ## Example
