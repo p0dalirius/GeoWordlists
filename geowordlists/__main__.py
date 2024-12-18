@@ -27,7 +27,7 @@ def parseArgs():
     group = parser.add_argument_group("Advanced options")
     group.add_argument("-o", "--output-file", required=False, default="wordlist.txt", help="Output file containing the generated wordlist.")
     group.add_argument("-m", "--max-passwords", required=False, default=None, type=int, help="Maximum passwords generated.")
-    group.add_argument("-c", "--only-cities", dest="novariants", action="store_true", default=False, help="Only generate cities name without variants (to feed hashcat for instance)")
+    group.add_argument("--no-variant", dest="novariant", action="store_true", default=False, help="Only generate cities name without variants (to feed hashcat for instance)")
 
 
     return parser.parse_args()
@@ -46,7 +46,7 @@ def main():
     if client_city is not None:
         candidates = country.radius_search(client_city, search_distance=options.kilometers)
 
-        wordlist = country.generate(candidates, options.novariants)
+        wordlist = country.generate(candidates, options.novariant)
 
         if options.max_passwords is not None:
             wordlist = wordlist[:options.max_passwords]

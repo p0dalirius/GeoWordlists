@@ -24,11 +24,11 @@ class France(object):
         debug: Boolean flag to enable/disable debug output
     """
 
-    def __init__(self, debug=False, novariants=False):
+    def __init__(self, debug=False, novariant=False):
         super(France, self).__init__()
         self.data = self.__load_data()
         self.debug = debug
-        self.novariants = novariants
+        self.novariant = novariant
 
     def __load_data(self):
         """
@@ -128,7 +128,7 @@ class France(object):
                 commune_name + data["commune"]["fields"]["code_postal"] + "!"
             ]
 
-            if novariants == False:
+            if novariant == False:
                 for variant in variants:
                     if variant not in wordlist:
                         wordlist.append(variant)
