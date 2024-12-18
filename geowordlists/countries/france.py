@@ -107,7 +107,7 @@ class France(object):
 
         return candidates
 
-    def generate(self, candidates, novariants):
+    def generate(self, candidates, novariant):
         """
 
         :param candidates:
