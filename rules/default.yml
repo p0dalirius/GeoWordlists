@@ -1,0 +1,13 @@
+
+meta:
+  name: "Default rule"
+  author: "Remi GASCOU (Podalirius)"
+  description: |
+    The default rule to be used when none is set.
+
+rules:
+  - rule:
+    template: "{{city}}!"
+
+  - rule:
+    template: "{{city}}{{postal_code}}!"
