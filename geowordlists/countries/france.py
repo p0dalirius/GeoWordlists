@@ -66,7 +66,6 @@ class France(object):
             while found_client_city == None:
                 chosen = int(input("Please specify the index number (0-%s) > " % (len(found_client_cities) -1 )))
                 if chosen in range(0, len(found_client_cities)):
-                    print('Yeah')
                     found_client_city = found_client_cities[chosen]
         elif len(found_client_cities) == 1:
             found_client_city = found_client_cities[0]
