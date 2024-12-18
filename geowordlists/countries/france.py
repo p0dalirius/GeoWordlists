@@ -24,10 +24,11 @@ class France(object):
         debug: Boolean flag to enable/disable debug output
     """
 
-    def __init__(self, debug=False):
+    def __init__(self, debug=False, novariants=False):
         super(France, self).__init__()
         self.data = self.__load_data()
         self.debug = debug
+        self.novariants = novariants
 
     def __load_data(self):
         """
@@ -106,7 +107,7 @@ class France(object):
 
         return candidates
 
-    def generate(self, candidates):
+    def generate(self, candidates, novariants):
         """
 
         :param candidates:
@@ -114,7 +115,7 @@ class France(object):
         """
 
         wordlist = []
-
+        print(f"{novariants}")
         for data in candidates:
             commune_name = data["commune"]["fields"]["nom_de_la_commune"]
             commune_name = re.sub("[ ',-]", "", commune_name)
@@ -127,8 +128,12 @@ class France(object):
                 commune_name + data["commune"]["fields"]["code_postal"] + "!"
             ]
 
-            for variant in variants:
-                if variant not in wordlist:
-                    wordlist.append(variant)
+            if novariants == False:
+                for variant in variants:
+                    if variant not in wordlist:
+                        wordlist.append(variant)
+            else:
+                if commune_name not in wordlist:
+                    wordlist.append(commune_name)
 
         return wordlist
