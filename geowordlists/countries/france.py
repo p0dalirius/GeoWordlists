@@ -115,7 +115,7 @@ class France(object):
         """
 
         wordlist = []
-        print(f"{novariants}")
+        
         for data in candidates:
             commune_name = data["commune"]["fields"]["nom_de_la_commune"]
             commune_name = re.sub("[ ',-]", "", commune_name)
