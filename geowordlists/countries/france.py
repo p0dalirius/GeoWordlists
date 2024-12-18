@@ -52,9 +52,25 @@ class France(object):
         :return:
         """
         found_client_city = None
+        found_client_cities = []
         for client_city in self.data:
             if client_city["fields"]["code_postal"] == postal_code:
-                found_client_city = client_city
+                found_client_cities.append(client_city)
+        if len(found_client_cities) > 1 :
+            print("[!] %s matching cities were found, please choose between :" % len(found_client_cities))
+            for city in found_client_cities:
+                print("[%s] %s " % (
+                    found_client_cities.index(city),
+                    city["fields"]["nom_de_la_commune"]
+                ))
+            while found_client_city == None:
+                chosen = int(input("Please specify the index number (0-%s) > " % (len(found_client_cities) -1 )))
+                if chosen in range(0, len(found_client_cities)):
+                    print('Yeah')
+                    found_client_city = found_client_cities[chosen]
+        elif len(found_client_cities) == 1:
+            found_client_city = found_client_cities[0]
+
         if found_client_city is not None:
             lat = found_client_city["geometry"]["coordinates"]["latitude"]
             long = found_client_city["geometry"]["coordinates"]["longitude"]
