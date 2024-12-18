@@ -1,0 +1,47 @@
+name: First run
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-geowordlist:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run GeoWordlist
+      id: run-geowordlist
+      run: |
+        set -e
+        python3 ./GeoWordlist.py -p 75001 2>&1 > geowordlist_output.log || echo "Error detected"
+
+    - name: Check for traceback
+      run: |
+        if grep -qi "Traceback (most recent call last):" geowordlist_output.log; then
+          echo "Script crashed. Traceback detected in output."
+          cat geowordlist_output.log
+          exit 1
+        else
+          echo "GeoWordlist executed successfully."
+        fi
+
+    - name: Output GeoWordlist log
+      if: failure()
+      run: cat geowordlist_output.log
