@@ -14,7 +14,7 @@
 
 ```
 $ ./GeoWordlists.py -h
-GeoWordlists.py v1.0.1 - by @podalirius_
+GeoWordlists.py v1.0.1 - by Remi GASCOU (Podalirius)
 
 usage: GeoWordlists.py [-h] [-v] [--debug] [-k KILOMETERS] [-o OUTPUT_FILE] -p POSTAL_CODE [--no-variant]
 
@@ -37,7 +37,7 @@ If you want to generate the list of probable passwords around `75001 Paris 01` w
 
 ```
 $ ./GeoWordlists.py -p 75001 -k 25 -o ./around_paris.txt
-GeoWordlists.py v1.0.1 - by @podalirius_
+GeoWordlists.py v1.0.1 - by Remi GASCOU (Podalirius)
 
 [>] Using client city in [75001:Paris 01] at (48.862549876, 2.336419316), FRANCE
 [>] Generated 1292 passwords sorted by probability

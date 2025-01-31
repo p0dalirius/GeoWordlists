@@ -14,7 +14,7 @@ VERSION = "1.0.1"
 
 
 def parseArgs():
-    print("GeoWordlists.py v%s - by @podalirius_\n" % VERSION)
+    print("GeoWordlists.py v%s - by Remi GASCOU (Podalirius)\n" % VERSION)
 
     parser = argparse.ArgumentParser(description="")
 
